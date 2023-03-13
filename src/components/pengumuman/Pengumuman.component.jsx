@@ -29,6 +29,19 @@ function PengumumanComponent() {
         >
           <Box as="time" dateTime="2021-01-15 15:30:00 +0000 UTC"></Box>
           <Heading size="md" my="2">
+            <LinkOverlay as={Link} to="/pengumuman/create/excel">Broadcast Using File</LinkOverlay>
+          </Heading>
+        </LinkBox>
+        <LinkBox
+          as="article"
+          maxW="sm"
+          p="5"
+          borderWidth="1px"
+          rounded="md"
+          backgroundColor="white"
+        >
+          <Box as="time" dateTime="2021-01-15 15:30:00 +0000 UTC"></Box>
+          <Heading size="md" my="2">
             <LinkOverlay as={Link} to="/pengumuman/all">Show All Pengumuman</LinkOverlay>
           </Heading>
         </LinkBox>

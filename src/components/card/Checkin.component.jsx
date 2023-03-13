@@ -17,6 +17,8 @@ export default function CheckinComponent() {
     console.log(data);
     console.log(isError);
   }, []);
+  const currentTime = new Date().getHours();
+  const disabledTime = currentTime >= 10 ? true : false;
   return (
     <Center py={6}>
       <Box
@@ -56,29 +58,29 @@ export default function CheckinComponent() {
             </Text>
           </Stack>
         </Stack>
-
-        <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={6}>
-          <form onSubmit={handleCheckin}>
-            <Button
-              isLoading={isLoading}
-              type="submit"
-              mt={10}
-              w={'full'}
-              bg={'green.400'}
-              color={'white'}
-              rounded={'xl'}
-              boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
-              _hover={{
-                bg: 'green.500',
-              }}
-              _focus={{
-                bg: 'green.500',
-              }}
-            >
-              Submit
-            </Button>
-          </form>
-        </Box>
+          <Box bg={useColorModeValue('gray.50', 'gray.900')} px={6} py={6}>
+            <form onSubmit={handleCheckin}>
+              <Button
+                isLoading={isLoading}
+                type='submit'
+                mt={10}
+                w={'full'}
+                bg={'green.400'}
+                color={'white'}
+                isDisabled={disabledTime}
+                rounded={'xl'}
+                boxShadow={'0 5px 20px 0px rgb(72 187 120 / 43%)'}
+                _hover={{
+                  bg: 'green.500',
+                }}
+                _focus={{
+                  bg: 'green.500',
+                }}
+              >
+                Submit
+              </Button>
+            </form>
+          </Box>
       </Box>
     </Center>
   );

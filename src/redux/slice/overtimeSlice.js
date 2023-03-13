@@ -10,13 +10,13 @@ export const createOvertime = createAsyncThunk(
         { keterangan, user_id: getState().auth.user.user_id },
         {
           headers: { Authorization: `Bearer ${getState().auth.token}` },
-        }
+        },
       );
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 export const getOvertime = createAsyncThunk(
@@ -30,7 +30,21 @@ export const getOvertime = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  }
+  },
+);
+
+export const getOvertimeHistory = createAsyncThunk(
+  'overtime/history',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const res = await instance.get(`/overtime/history`, {
+        headers: { Authorization: `Bearer ${getState().auth.token}` },
+      });
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
 );
 
 export const approveOvertime = createAsyncThunk(
@@ -45,13 +59,13 @@ export const approveOvertime = createAsyncThunk(
             'Content-Type': 'application/json',
             Authorization: `Bearer ${getState().auth.token}`,
           },
-        }
+        },
       );
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 export const rejectOvertime = createAsyncThunk(
@@ -66,13 +80,13 @@ export const rejectOvertime = createAsyncThunk(
             'Content-Type': 'application/json',
             Authorization: `Bearer ${getState().auth.token}`,
           },
-        }
+        },
       );
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 const initialState = {
@@ -156,6 +170,24 @@ const overtimeSlice = createSlice({
       state.isError = null;
     });
     builder.addCase(rejectOvertime.rejected, (state, action) => {
+      state.isLoading = false;
+      state.data = null;
+      state.isSuccess = false;
+      state.isError = action.error;
+    });
+    /**
+     * Get Overtime History
+     */
+    builder.addCase(getOvertimeHistory.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getOvertimeHistory.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload;
+      state.isSuccess = true;
+      state.isError = null;
+    });
+    builder.addCase(getOvertimeHistory.rejected, (state, action) => {
       state.isLoading = false;
       state.data = null;
       state.isSuccess = false;

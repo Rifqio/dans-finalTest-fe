@@ -16,6 +16,8 @@ export default function CheckoutComponent() {
     console.log(data);
     console.log(isError);
   }, []);
+  const currentTime = new Date().getHours();
+  const disabledTime = currentTime >= 19 ? true : false;
   return (
     <Center py={6}>
       <Box
@@ -63,6 +65,7 @@ export default function CheckoutComponent() {
               type="submit"
               mt={10}
               w={'full'}
+              isDisabled={disabledTime}
               bg={'green.400'}
               color={'white'}
               rounded={'xl'}

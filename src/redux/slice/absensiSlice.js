@@ -5,33 +5,29 @@ export const createCheckin = createAsyncThunk(
   'absensi/checkin',
   async (_, { getState, rejectWithValue, fulfillWithValue }) => {
     try {
-      const res = await instance.post(
-        '/absen/checkin',
-        { id_user: getState().auth.user.user_id },
-        { headers: { Authorization: `Bearer ${getState().auth.token}` } }
-      );
+      const res = await instance.post('/absen/checkin', _, {
+        headers: { Authorization: `Bearer ${getState().auth.token}` },
+      });
       return res.data;
     } catch (error) {
       console.log(rejectWithValue(error.response.data.message));
       return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 export const createCheckout = createAsyncThunk(
   'absensi/checkout',
   async (_, { getState, rejectWithValue, fulfillWithValue }) => {
     try {
-      const res = await instance.post(
-        '/absen/checkout',
-        { id_user: getState().auth.user.user_id },
-        { headers: { Authorization: `Bearer ${getState().auth.token}` } }
-      );
+      const res = await instance.post('/absen/checkout', _, {
+        headers: { Authorization: `Bearer ${getState().auth.token}` },
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 const initialState = {
@@ -93,5 +89,5 @@ const absensiSlice = createSlice({
   },
 });
 
-export const { resetAbsenState } = absensiSlice.actions
+export const { resetAbsenState } = absensiSlice.actions;
 export default absensiSlice.reducer;

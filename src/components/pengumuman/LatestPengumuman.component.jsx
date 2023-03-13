@@ -11,7 +11,8 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPengumuman } from '../../redux/slice/pengumumanSlice';
 import { formatDistance, formatDistanceToNow, parseISO } from 'date-fns';
-function StatsCard({ title, stat }) {
+import { Link } from 'react-router-dom';
+function StatsCard({ title, stat, id }) {
   //   const { title, stat } = props;
   return (
     <Stat
@@ -25,7 +26,7 @@ function StatsCard({ title, stat }) {
       <StatLabel fontWeight={'medium'} isTruncated>
         {title}
       </StatLabel>
-      <StatNumber fontSize={'2xl'} fontWeight={'medium'}>
+      <StatNumber as={Link} to={`pengumuman/${id}`} fontSize={'2xl'} fontWeight={'medium'}>
         {stat}
       </StatNumber>
     </Stat>
@@ -40,7 +41,7 @@ export default function Pengumuman() {
     console.log(data);
   }, []);
   return (
-    <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
+    <Box maxW='7xl' mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
       <chakra.h1 textAlign={'center'} fontSize={'4xl'} py={10} fontWeight={'bold'}>
         Recently Broadcasted Pengumuman
       </chakra.h1>
@@ -52,8 +53,9 @@ export default function Pengumuman() {
             .map((data) => (
               <StatsCard
                 key={data.id_pengumuman}
+                id={data.id_pengumuman}
                 title={formatDistanceToNow(parseISO(data.created_at), { addSuffix: true })}
-                stat={data.content}
+                stat={data.title}
               />
             ))}
         {/* <StatsCard title={'In'} stat={'30 different countries'} />

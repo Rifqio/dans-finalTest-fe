@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-function OvertimeComponent() {
+function ReimbursmentMenuComponent() {
   const { user } = useSelector((state) => state.auth);
   return (
     <Center>
@@ -18,8 +18,8 @@ function OvertimeComponent() {
         >
           <Box as='time' dateTime='2021-01-15 15:30:00 +0000 UTC'></Box>
           <Heading size='md' my='2'>
-            <LinkOverlay as={Link} to='/overtime/create'>
-              Create New Overtime Request
+            <LinkOverlay as={Link} to='/reimbursment/create'>
+              Request New Reimbursment
             </LinkOverlay>
           </Heading>
         </LinkBox>
@@ -33,8 +33,8 @@ function OvertimeComponent() {
         >
           <Box as='time' dateTime='2021-01-15 15:30:00 +0000 UTC'></Box>
           <Heading size='md' my='2'>
-            <LinkOverlay as={Link} to='/overtime/myhistory'>
-              My Overtime Request History
+            <LinkOverlay as={Link} to='/reimbursment/myhistory'>
+              My Reimbursment History
             </LinkOverlay>
           </Heading>
         </LinkBox>
@@ -49,8 +49,8 @@ function OvertimeComponent() {
           >
             <Box as='time' dateTime='2021-01-15 15:30:00 +0000 UTC'></Box>
             <Heading size='md' my='2'>
-              <LinkOverlay as={Link} to='/overtime/all'>
-                Show All Overtime Request
+              <LinkOverlay as={Link} to='/reimbursment/all'>
+                Show All Reimbursment
               </LinkOverlay>
             </Heading>
           </LinkBox>
@@ -60,4 +60,4 @@ function OvertimeComponent() {
   );
 }
 
-export default OvertimeComponent;
+export default ReimbursmentMenuComponent;
